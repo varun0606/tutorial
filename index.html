@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.css">
+
+  <title>Exclusive</title>
+</head>
+
+<body>
+  <div class="main>">
+
+<!-- Navigation Bar -->
+
+    <nav>
+      <h2>Exclusive</h2>
+      <div class="about">
+        <li><a href="index.html"></a> Home</li>
+        <li>Contact</li>
+        <li>About</li>
+        <li>Sign Up</li>
+      </div>
+      <div class="cart">
+        <div class="search-bar">
+          <input type="text" id="searchInput" placeholder="Search for Products">
+          <button class="src-btn" id="search" type="submit" onclick="searchAndDisplay()"><i class="fa fa-search"
+              aria-hidden="true"></i>
+          </button>
+        </div>
+        <div class="login" a href=""></a>
+          <li><a href="cart.html">Cart</a></li>
+          <li><a href="orders.html">My orders</a></li>
+          <button>Login</button>
+        </div>
+      </div>
+    </nav>
+
+<!--Content Part  -->
+
+    <div class="content">
+      <div class="left">
+        <div class="sort-items store">
+          <select id="sortOrder">
+            <option value="asc">Price : Low-High</option>
+            <option value="desc">Price : High-Low</option>
+          </select>
+          <button onclick="sortData()">Filter</button>
+        </div>
+        <div>
+          <div class="rang"> <input type="checkbox" id="descending" onclick="sortRate('top')">
+            <label for="descending">Top Rated</label>
+          </div>
+          <div class="rang"> <input type="checkbox" id="ascending" onclick="sortRate('les')">
+            <label for="ascending">Less Ratings</label>
+          </div>
+        </div>
+      </div>
+      <div id="data-container" class="flex-container"></div>
+      <div id="details-container"> </div>
+    </div>
+
+    <!-- Footer part -->
+
+    <footer>
+      <div class="lft_footer">
+        <p>Copyright &copy; 2019, All rights reserved.</p>
+      </div>
+      <div class="right_footer">
+        <li>Home</li>
+        <li>About</li>
+        <li>Contact Us</li>
+        <li>Login</li>
+      </div>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+
+</body>
+</html>

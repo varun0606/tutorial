@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    .shop-ca {
+      width: 25%;
+      height: 40px;
+      font-size: 27px;
+      margin-left: 30%;
+      padding: 8px;
+    }
+
+    .about li a {
+      list-style: none;
+      text-decoration: none;
+      color: black;
+    }
+
+    .cart {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      width: 177px;
+      list-style: none;
+      font-weight: bold;
+    }
+
+    .cart-item h3 {
+      font-size: 18px;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="cart-nav">
+    <h2>Exclusive</h2>
+    <div class="about">
+      <li><a href="index.html">Home</a> </li>
+      <li>Contact</li>
+      <li>About</li>
+      <li>Sign Up</li>
+    </div>
+    <div class="cart">
+      <!-- <div class="search-bar">
+        <input type="text" id="searchInput"   placeholder="Search for Products">
+        <button class="src-btn" id="search" type="submit" onclick="searchAndDisplay()" ><i class="fa fa-search" aria-hidden="true"></i>
+        </button>
+      </div> -->
+      <div class="login" a href=""></a>
+        <li><a href="cart.html">Cart</a></li>
+        <button>Login</button>
+      </div>
+    </div>
+  </nav>
+  <h2 class="shop-ca">Shopping Cart Items</h2>
+  <div class="cart-disp">
+    <div id="cart-container"></div>
+    <div class="price-det">
+      <h2>Price Details</h2>
+      <p id="total-price"></p>
+      <button id="rzp-button1">Purchase</button>
+    </div>
+  </div>
+  <footer>
+    <div class="lft_footer">
+      <p>Copyright &copy; 2019, All rights reserved.</p>
+
+    </div>
+    <div class="right_footer">
+      <li>Home</li>
+      <li>About</li>
+      <li>Contact Us</li>
+      <li>Login</li>
+    </div>
+
+  </footer>
+
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+  <script>
+    // Retrieve cart data from local storage
+    const cartData = JSON.parse(localStorage.getItem('cartItems')) || [];
+
+    // Get the container where cart items will be displayed
+    const cartContainer = document.getElementById('cart-container');
+
+    // Iterate through cart items and display image, title, and price
+    cartData.forEach(item => {
+      const cartItemDiv = document.createElement('div');
+      cartItemDiv.classList.add('cart-item');
+
+      // Display image
+      const imgElement = document.createElement('img');
+      imgElement.src = item.image;
+      imgElement.alt = item.title;
+      imgElement.width = 130;
+      imgElement.height = 140;
+      cartItemDiv.appendChild(imgElement);
+
+      // Display title
+      const titleElement = document.createElement('h3');
+      titleElement.textContent = item.title;
+      cartItemDiv.appendChild(titleElement);
+
+      // Display price
+      const priceElement = document.createElement('p');
+      priceElement.textContent = `$${item.price}`;
+      cartItemDiv.appendChild(priceElement);
+
+      // Append the cart item to the container
+      cartContainer.appendChild(cartItemDiv);
+    });
+    const totalPrice = cartData.reduce((total, item) => total + item.price, 0);
+    const totalPriceElement = document.getElementById('total-price');
+    totalPriceElement.textContent = `Total Price:   $${totalPrice.toFixed(2)}`;
+
+    //payment Gateway
+
+    var successPageUrl = 'success.html';
+    var failurePageUrl = 'failure.html';
+    var cartAmnt = document.getElementById('total-price').value;
+
+    var options = {
+      "key": "rzp_test_VkTzxB9XurPV51", // Enter the Key ID generated from the Dashboard
+      "amount": "1000",
+      "currency": "INR",
+      "description": "Acme Corp",
+      "image": "https://s3.amazonaws.com/rzp-mobile/images/rzp.jpg",
+      "prefill":
+      {
+        "email": "gaurav.kumar@example.com",
+        "contact": +919900000000,
+      },
+      config: {
+        display: {
+          blocks: {
+            utib: { //name for Axis block
+              name: "Pay using Axis Bank",
+              instruments: [
+                {
+                  method: "card",
+                  issuers: ["UTIB"]
+                },
+                {
+                  method: "netbanking",
+                  banks: ["UTIB"]
+                },
+              ]
+            },
+            other: { //  name for other block
+              name: "Other Payment modes",
+              instruments: [
+                {
+                  method: "card",
+                  issuers: ["ICIC"]
+                },
+                {
+                  method: 'netbanking',
+                }
+              ]
+            }
+          },
+          hide: [
+            {
+              method: "upi"
+            }
+          ],
+          sequence: ["block.utib", "block.other"],
+          preferences: {
+            show_default_blocks: false // Should Checkout show its default blocks?
+          }
+        }
+      },
+      "handler": function (response) {
+        alert(response.razorpay_payment_id);
+        window.location.href = successPageUrl;
+      },
+      "modal": {
+        "ondismiss": function () {
+          if (confirm("Are you sure, you want to close the form?")) {
+            txt = "You pressed OK!";
+            console.log("Checkout form closed by the user");
+          } else {
+            txt = "You pressed Cancel!";
+            console.log("Complete the Payment")
+          }
+        }
+      }
+    };
+    var rzp1 = new Razorpay(options);
+    document.getElementById('rzp-button1').onclick = function (e) {
+      rzp1.open();
+      e.preventDefault();
+    }
+
+    rzp1.on('payment.failed', function (response) {
+      window.location.href = failurePageUrl;
+    });
+  </script>
+
+</body>
+
+</html>

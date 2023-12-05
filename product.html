@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Document</title>
+  <style>
+    .about li a {
+      color: black;
+      text-decoration: none;
+    }
+
+    .product-content {
+      display: flex;
+      flex-direction: column;
+      gap: 23px;
+      height: 215px;
+    }
+
+    .cart {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      width: 177px;
+      list-style: none;
+      font-weight: bold;
+    }
+
+    .cart-item h3 {
+      font-size: 18px;
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <h2>Exclusive</h2>
+    <div class="about">
+      <li><a href="index.html">Home</a> </li>
+      <li>Contact</li>
+      <li>About</li>
+      <li>Sign Up</li>
+    </div>
+    <div class="cart">
+      <!-- <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Search for Products">
+        <button class="src-btn" id="search" type="submit" onclick="searchAndDisplay()"><i class="fa fa-search"
+            aria-hidden="true"></i>
+        </button>
+      </div> -->
+      <div class="login" a href=""></a>
+        <li><a href="cart.html">Cart</a></li>
+        <button>Login</button>
+      </div>
+    </div>
+  </nav>
+  <div id="product-container"></div>
+  <div class="cart1">
+    <button id="addToCartBtn" onclick="addToCart()">Add to Cart</button>
+  </div>
+  <footer style="  margin-top: 227px;
+  ">
+    <div class="lft_footer">
+      <p>Copyright &copy; 2019, All rights reserved.</p>
+
+    </div>
+    <div class="right_footer">
+      <li>Home</li>
+      <li>About</li>
+      <li>Contact Us</li>
+      <li>Login</li>
+    </div>
+
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
